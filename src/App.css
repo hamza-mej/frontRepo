@@ -1,0 +1,19 @@
+
+.App {
+  text-align: center;
+
+}
+
+.list-group-item span{
+  font-weight: bold;
+}
+
+.search-input{
+  border: none;
+  outline:none;
+}
+
+.search-input:active{
+  border: none;
+  outline:none;
+}
