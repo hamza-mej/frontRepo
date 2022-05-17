@@ -23,6 +23,10 @@ function BookList() {
         })
     }, [search])
 
+    if(!Book){
+        return null;
+    }
+
     const handleChange = e => {
         setSearch(e.target.value);
     };
