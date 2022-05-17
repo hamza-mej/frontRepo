@@ -4,6 +4,8 @@ import axios from 'axios';
 
 function BookDetail() {
 
+    const { REACT_APP_MY_API_KEY } = process.env;
+
     const { id } = useParams();
     const [user, setUser] = useState({
         title: "",
@@ -12,8 +14,9 @@ function BookDetail() {
         description: "",
     })
 
+
     useEffect(() => {
-        axios.get(`https://127.0.0.1:8000/api/books/${id}`, {
+        axios.get(`${REACT_APP_MY_API_KEY}books/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 Accept: 'application/json'
@@ -28,7 +31,7 @@ function BookDetail() {
 
 
     return (
-        <div className="App container  ">
+        <div className="App container">
 
             <h1 className='mb-4 mt-4'>Book Detail</h1>
 

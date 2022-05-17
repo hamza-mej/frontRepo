@@ -5,22 +5,23 @@ import { Table } from 'reactstrap';
 
 function BookList() {
 
+    const { REACT_APP_MY_API_KEY } = process.env;
+
     const [Book, setBook] = useState([])
     const [search, setSearch] = useState("");
 
     useEffect(() => {
-        axios.get('https://127.0.0.1:8000/api/book', {
+        axios.get(`${REACT_APP_MY_API_KEY}books?page=1&title=${search}`, {
             headers: {
                 'Content-Type': 'application/json',
                 Accept: 'application/json'
             }
         }).then(res => {
-            // console.log(res.data)
             setBook(res.data)
         }).catch(err => {
             console.log(err)
         })
-    }, [])
+    }, [search])
 
     const handleChange = e => {
         setSearch(e.target.value);
@@ -32,9 +33,7 @@ function BookList() {
         setSearch("")
     };
 
-    let allBooks = Book.filter((val) =>{
-        return val.title.toLowerCase().includes(search.toLowerCase())
-    }).map((book) => {
+    let allBooks = Book.map((book) => {
         return (
             <tr key={book.id}>
                 <td>{book.id}</td>
@@ -65,7 +64,7 @@ function BookList() {
             </form>
 
             <Table striped hover className="table shadow rounded bg-white mt-4">
-                <thead className="thead-dark">
+                <thead className="thead-dark ">
                 <tr>
                     <th>#</th>
                     <th>Title</th>
