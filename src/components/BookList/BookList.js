@@ -7,7 +7,7 @@ function BookList() {
 
     const { REACT_APP_MY_API_KEY } = process.env;
 
-    const [Book, setBook] = useState([])
+    const [Book, setBook] = useState([]);
     const [search, setSearch] = useState("");
 
     useEffect(() => {
@@ -17,9 +17,9 @@ function BookList() {
                 Accept: 'application/json'
             }
         }).then(res => {
-            setBook(res.data)
+            setBook(res.data);
         }).catch(err => {
-            console.log(err)
+            console.log(err);
         })
     }, [search])
 
@@ -37,9 +37,8 @@ function BookList() {
         setSearch("")
     };
 
-    let allBooks = Book.map((book) => {
-        return (
-            <tr key={book.id}>
+    const renderBooks = () =>  Book.map((book) => (
+            <tr key={book.id} data-testid='book'>
                 <td>{book.id}</td>
                 <td>{book.title}</td>
                 <td>{book.author.id}</td>
@@ -48,8 +47,7 @@ function BookList() {
                     <Link to={`/BookDetail/${book.id}`} className="btn btn-secondary" state={{ Book }}>View</Link>
                 </td>
             </tr>
-        )
-    });
+    ));
 
     return (
         <div className="App container ">
@@ -79,7 +77,7 @@ function BookList() {
                 </thead>
 
                 <tbody>
-                {allBooks}
+                {renderBooks()}
                 </tbody>
             </Table>
         </div>
